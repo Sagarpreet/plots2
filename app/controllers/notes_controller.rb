@@ -161,9 +161,9 @@ class NotesController < ApplicationController
   def preview
     return show_banned_flash unless current_user.status == User::Status::NORMAL
     @node, @img, @body = new_preview_note
-    binding.pry
     @preview = true
     @preview_tags = add_preview_tags
+    # @tagnames = @preview_tags
     @event_date = params[:date] if params[:date]
     flash[:notice] = "You are currently viewing a preview"
     render template: 'notes/show'
@@ -456,6 +456,7 @@ class NotesController < ApplicationController
   end
 
   def add_preview_tags
+    tags = []
     if params[:tags].present?
       tags = params[:tags]&.tr(' ', ',')&.split(',')&.reject(&:empty?)
     end

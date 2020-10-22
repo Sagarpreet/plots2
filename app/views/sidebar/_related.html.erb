@@ -6,9 +6,11 @@
     <%= feature('sidebar') %>
   <% end %>
 
-  <div class="d-print-none">
-    <%= render :partial => "like/like", :locals => {:node => @node, :tagnames => @tagnames } %>
-  </div>
+  <% if !@preview %>
+    <div class="d-print-none">
+      <%= render :partial => "like/like", :locals => {:node => @node, :tagnames => @tagnames } %>
+    </div>
+  <% end %>
 
   <% if @node %>
     <%= render partial: "sidebar/events" %>
